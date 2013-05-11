@@ -75,6 +75,7 @@
             this.buttonItem30 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem31 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem32 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem34 = new DevComponents.DotNetBar.ButtonItem();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.metroAppButton1 = new DevComponents.DotNetBar.Metro.MetroAppButton();
@@ -370,7 +371,8 @@
             this.buttonItem24,
             this.buttonItem28,
             this.buttonItem31,
-            this.buttonItem32});
+            this.buttonItem32,
+            this.buttonItem34});
             this.buttonItem17.Text = "buttonItem1";
             // 
             // buttonItem18
@@ -459,6 +461,13 @@
             // 
             this.buttonItem32.Name = "buttonItem32";
             this.buttonItem32.Text = "Remote Desktop";
+            this.buttonItem32.Click += new System.EventHandler(this.buttonItem32_Click);
+            // 
+            // buttonItem34
+            // 
+            this.buttonItem34.Name = "buttonItem34";
+            this.buttonItem34.Text = "Chat";
+            this.buttonItem34.Click += new System.EventHandler(this.buttonItem34_Click);
             // 
             // label1
             // 
@@ -707,6 +716,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.ColumnHeader columnHeader12;
+        private DevComponents.DotNetBar.ButtonItem buttonItem34;
     }
 }
 
