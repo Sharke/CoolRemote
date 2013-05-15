@@ -27,7 +27,7 @@ namespace WindowsFormsApplication1
         }
 
 
-        void RDP_Start(NetworkStream NS)
+        public void RDP_Start(NetworkStream NS)
         {
            
             StreamReader SR = new StreamReader(NS);
@@ -35,27 +35,18 @@ namespace WindowsFormsApplication1
             
             for (; ; )
             {
-                string Data = SR.ReadLine();
-               
-                if (Data != null)
+                char[] ByteData = new char[350208];
+                SR.Read(ByteData, 0, 350208);
+                string Data = new string(ByteData);
+                string[] Delimeter = new string[] { "|***|" };
+                string[] DataSplit = Data.Split(Delimeter, StringSplitOptions.None);
+                if (DataSplit[0] == "REMOTEDATA")
                 {
-                    int Size = Convert.ToInt32(Data);
-                    byte[] ImgByte = new byte[Size];
-                    SW.WriteLine("OK");
-                    SW.Flush();
-                    NS.Read(ImgByte, 0, ImgByte.Length);
-                    File.WriteAllText("C:\\TESTINGBYTES.txt",Convert.ToBase64String(ImgByte));
-                    pictureBox1.Image = ByteToImage(ImgByte);
-                    Thread.Sleep(1000);
+                    
                 }
 
             }
-           // byte[] imgByte = new byte[32768];
-            //NS.Read(imgByte, 0, imgByte.Length);
-            //while (NS.DataAvailable)
-            //{
-            //    pictureBox1.Image = ByteToImage(imgByte);
-           // }
+
         }
 
         public static Bitmap ByteToImage(byte[] blob)
@@ -73,9 +64,6 @@ namespace WindowsFormsApplication1
         private void Remote_Load(object sender, EventArgs e)
         {
            
-            //Main newmain = new Main();
-            //NetworkStream Net = newmain.NSArray[1];
-            //RDP_Start(Net);
         }
 
        

