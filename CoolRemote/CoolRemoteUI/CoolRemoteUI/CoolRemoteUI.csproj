@@ -8,7 +8,7 @@
     <ProjectGuid>{0477178B-3698-4585-B032-840CBD346EFB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WindowsFormsApplication1</RootNamespace>
+    <RootNamespace>CoolRemote</RootNamespace>
     <AssemblyName>CoolRemoteUI</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>

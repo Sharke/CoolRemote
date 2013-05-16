@@ -60,20 +60,6 @@
             this.switchButton1 = new DevComponents.DotNetBar.Controls.SwitchButton();
             this.contextMenuBar1 = new DevComponents.DotNetBar.ContextMenuBar();
             this.buttonItem17 = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem34 = new DevComponents.DotNetBar.ButtonItem();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.metroAppButton1 = new DevComponents.DotNetBar.Metro.MetroAppButton();
-            this.superTabControl1 = new DevComponents.DotNetBar.SuperTabControl();
-            this.superTabControlPanel1 = new DevComponents.DotNetBar.SuperTabControlPanel();
-            this.superTabItem1 = new DevComponents.DotNetBar.SuperTabItem();
-            this.superTabControlPanel2 = new DevComponents.DotNetBar.SuperTabControlPanel();
-            this.superTabItem2 = new DevComponents.DotNetBar.SuperTabItem();
-            this.metroTabItem3 = new DevComponents.DotNetBar.Metro.MetroTabItem();
-            this.metroTabItem4 = new DevComponents.DotNetBar.Metro.MetroTabItem();
-            this.styleManager2 = new DevComponents.DotNetBar.StyleManager(this.components);
-            this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem33 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem18 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem19 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem20 = new DevComponents.DotNetBar.ButtonItem();
@@ -89,6 +75,20 @@
             this.buttonItem30 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem31 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem32 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem34 = new DevComponents.DotNetBar.ButtonItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.metroAppButton1 = new DevComponents.DotNetBar.Metro.MetroAppButton();
+            this.superTabControl1 = new DevComponents.DotNetBar.SuperTabControl();
+            this.superTabControlPanel1 = new DevComponents.DotNetBar.SuperTabControlPanel();
+            this.superTabItem1 = new DevComponents.DotNetBar.SuperTabItem();
+            this.superTabControlPanel2 = new DevComponents.DotNetBar.SuperTabControlPanel();
+            this.superTabItem2 = new DevComponents.DotNetBar.SuperTabItem();
+            this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem33 = new DevComponents.DotNetBar.ButtonItem();
+            this.metroTabItem3 = new DevComponents.DotNetBar.Metro.MetroTabItem();
+            this.metroTabItem4 = new DevComponents.DotNetBar.Metro.MetroTabItem();
+            this.styleManager2 = new DevComponents.DotNetBar.StyleManager(this.components);
             this.metroShell1.SuspendLayout();
             this.metroTabPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).BeginInit();
@@ -375,9 +375,104 @@
             this.buttonItem34});
             this.buttonItem17.Text = "buttonItem1";
             // 
+            // buttonItem18
+            // 
+            this.buttonItem18.Image = global::CoolRemote.Properties.Resources.information;
+            this.buttonItem18.Name = "buttonItem18";
+            this.buttonItem18.Text = "Info";
+            // 
+            // buttonItem19
+            // 
+            this.buttonItem19.Image = global::CoolRemote.Properties.Resources.email_edit;
+            this.buttonItem19.Name = "buttonItem19";
+            this.buttonItem19.Text = "Message";
+            this.buttonItem19.Click += new System.EventHandler(this.buttonItem19_Click);
+            // 
+            // buttonItem20
+            // 
+            this.buttonItem20.Image = global::CoolRemote.Properties.Resources.music;
+            this.buttonItem20.Name = "buttonItem20";
+            this.buttonItem20.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItem21,
+            this.buttonItem22,
+            this.buttonItem23});
+            this.buttonItem20.Text = "Sound";
+            // 
+            // buttonItem21
+            // 
+            this.buttonItem21.Name = "buttonItem21";
+            this.buttonItem21.Text = "VOIP";
+            // 
+            // buttonItem22
+            // 
+            this.buttonItem22.Name = "buttonItem22";
+            this.buttonItem22.Text = "Text to Speech";
+            // 
+            // buttonItem23
+            // 
+            this.buttonItem23.Name = "buttonItem23";
+            this.buttonItem23.Text = "FLV";
+            // 
+            // buttonItem24
+            // 
+            this.buttonItem24.Image = global::CoolRemote.Properties.Resources.folder;
+            this.buttonItem24.Name = "buttonItem24";
+            this.buttonItem24.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItem25,
+            this.buttonItem26,
+            this.buttonItem27});
+            this.buttonItem24.Text = "File";
+            // 
+            // buttonItem25
+            // 
+            this.buttonItem25.Name = "buttonItem25";
+            this.buttonItem25.Text = "Execute";
+            // 
+            // buttonItem26
+            // 
+            this.buttonItem26.Name = "buttonItem26";
+            this.buttonItem26.Text = "Download";
+            // 
+            // buttonItem27
+            // 
+            this.buttonItem27.Name = "buttonItem27";
+            this.buttonItem27.Text = "Transfer";
+            // 
+            // buttonItem28
+            // 
+            this.buttonItem28.Image = global::CoolRemote.Properties.Resources.world;
+            this.buttonItem28.Name = "buttonItem28";
+            this.buttonItem28.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItem29,
+            this.buttonItem30});
+            this.buttonItem28.Text = "Browser";
+            // 
+            // buttonItem29
+            // 
+            this.buttonItem29.Name = "buttonItem29";
+            this.buttonItem29.Text = "Info";
+            // 
+            // buttonItem30
+            // 
+            this.buttonItem30.Name = "buttonItem30";
+            this.buttonItem30.Text = "Visit";
+            // 
+            // buttonItem31
+            // 
+            this.buttonItem31.Image = global::CoolRemote.Properties.Resources.webcam;
+            this.buttonItem31.Name = "buttonItem31";
+            this.buttonItem31.Text = "Webcam";
+            // 
+            // buttonItem32
+            // 
+            this.buttonItem32.Image = global::CoolRemote.Properties.Resources.computer;
+            this.buttonItem32.Name = "buttonItem32";
+            this.buttonItem32.Text = "Remote Desktop";
+            this.buttonItem32.Click += new System.EventHandler(this.buttonItem32_Click);
+            // 
             // buttonItem34
             // 
-            this.buttonItem34.Image = global::WindowsFormsApplication1.Properties.Resources.comments;
+            this.buttonItem34.Image = global::CoolRemote.Properties.Resources.comments;
             this.buttonItem34.Name = "buttonItem34";
             this.buttonItem34.Text = "Chat";
             this.buttonItem34.Click += new System.EventHandler(this.buttonItem34_Click);
@@ -424,9 +519,9 @@
             // 
             // superTabControl1
             // 
-            this.superTabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.superTabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.superTabControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             // 
             // 
@@ -502,23 +597,6 @@
             this.superTabItem2.Name = "superTabItem2";
             this.superTabItem2.Text = "License";
             // 
-            // metroTabItem3
-            // 
-            this.metroTabItem3.Checked = true;
-            this.metroTabItem3.Name = "metroTabItem3";
-            this.metroTabItem3.Panel = this.metroTabPanel1;
-            this.metroTabItem3.Text = "&CONNECTED";
-            // 
-            // metroTabItem4
-            // 
-            this.metroTabItem4.Name = "metroTabItem4";
-            this.metroTabItem4.Text = "&VIEW";
-            // 
-            // styleManager2
-            // 
-            this.styleManager2.ManagerStyle = DevComponents.DotNetBar.eStyle.Metro;
-            this.styleManager2.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255))))), System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198))))));
-            // 
             // buttonItem1
             // 
             this.buttonItem1.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
@@ -543,100 +621,22 @@
             this.buttonItem33.Stretch = true;
             this.buttonItem33.Text = "Open";
             // 
-            // buttonItem18
+            // metroTabItem3
             // 
-            this.buttonItem18.Image = global::WindowsFormsApplication1.Properties.Resources.information;
-            this.buttonItem18.Name = "buttonItem18";
-            this.buttonItem18.Text = "Info";
+            this.metroTabItem3.Checked = true;
+            this.metroTabItem3.Name = "metroTabItem3";
+            this.metroTabItem3.Panel = this.metroTabPanel1;
+            this.metroTabItem3.Text = "&CONNECTED";
             // 
-            // buttonItem19
+            // metroTabItem4
             // 
-            this.buttonItem19.Image = global::WindowsFormsApplication1.Properties.Resources.email_edit;
-            this.buttonItem19.Name = "buttonItem19";
-            this.buttonItem19.Text = "Message";
-            this.buttonItem19.Click += new System.EventHandler(this.buttonItem19_Click);
+            this.metroTabItem4.Name = "metroTabItem4";
+            this.metroTabItem4.Text = "&VIEW";
             // 
-            // buttonItem20
+            // styleManager2
             // 
-            this.buttonItem20.Image = global::WindowsFormsApplication1.Properties.Resources.music;
-            this.buttonItem20.Name = "buttonItem20";
-            this.buttonItem20.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItem21,
-            this.buttonItem22,
-            this.buttonItem23});
-            this.buttonItem20.Text = "Sound";
-            // 
-            // buttonItem21
-            // 
-            this.buttonItem21.Name = "buttonItem21";
-            this.buttonItem21.Text = "VOIP";
-            // 
-            // buttonItem22
-            // 
-            this.buttonItem22.Name = "buttonItem22";
-            this.buttonItem22.Text = "Text to Speech";
-            // 
-            // buttonItem23
-            // 
-            this.buttonItem23.Name = "buttonItem23";
-            this.buttonItem23.Text = "FLV";
-            // 
-            // buttonItem24
-            // 
-            this.buttonItem24.Image = global::WindowsFormsApplication1.Properties.Resources.folder;
-            this.buttonItem24.Name = "buttonItem24";
-            this.buttonItem24.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItem25,
-            this.buttonItem26,
-            this.buttonItem27});
-            this.buttonItem24.Text = "File";
-            // 
-            // buttonItem25
-            // 
-            this.buttonItem25.Name = "buttonItem25";
-            this.buttonItem25.Text = "Execute";
-            // 
-            // buttonItem26
-            // 
-            this.buttonItem26.Name = "buttonItem26";
-            this.buttonItem26.Text = "Download";
-            // 
-            // buttonItem27
-            // 
-            this.buttonItem27.Name = "buttonItem27";
-            this.buttonItem27.Text = "Transfer";
-            // 
-            // buttonItem28
-            // 
-            this.buttonItem28.Image = global::WindowsFormsApplication1.Properties.Resources.world;
-            this.buttonItem28.Name = "buttonItem28";
-            this.buttonItem28.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItem29,
-            this.buttonItem30});
-            this.buttonItem28.Text = "Browser";
-            // 
-            // buttonItem29
-            // 
-            this.buttonItem29.Name = "buttonItem29";
-            this.buttonItem29.Text = "Info";
-            // 
-            // buttonItem30
-            // 
-            this.buttonItem30.Name = "buttonItem30";
-            this.buttonItem30.Text = "Visit";
-            // 
-            // buttonItem31
-            // 
-            this.buttonItem31.Image = global::WindowsFormsApplication1.Properties.Resources.webcam;
-            this.buttonItem31.Name = "buttonItem31";
-            this.buttonItem31.Text = "Webcam";
-            // 
-            // buttonItem32
-            // 
-            this.buttonItem32.Image = global::WindowsFormsApplication1.Properties.Resources.computer;
-            this.buttonItem32.Name = "buttonItem32";
-            this.buttonItem32.Text = "Remote Desktop";
-            this.buttonItem32.Click += new System.EventHandler(this.buttonItem32_Click);
+            this.styleManager2.ManagerStyle = DevComponents.DotNetBar.eStyle.Metro;
+            this.styleManager2.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255))))), System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198))))));
             // 
             // Main
             // 
