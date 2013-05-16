@@ -15,35 +15,34 @@ namespace WindowsFormsApplication1
 {
     public partial class Remote : DevComponents.DotNetBar.OfficeForm
     {
-
-        public Remote(NetworkStream NS)
+        //NetworkStream NS;
+        //StreamWriter SW;
+        //StreamReader SR;
+        public Remote(StreamReader SRP, StreamWriter SWP)
         {
             InitializeComponent();
-            StreamWriter SW = new StreamWriter(NS);
-            SW.WriteLine("RDP");
-            SW.Flush();
-            Thread Doet = new Thread(() => RDP_Start(NS));
+           // NS = NSP;
+            //StreamWriter SW = new StreamWriter(NS);
+            //SW.WriteLine("RDP");
+            //SW.Flush();
+            Thread Doet = new Thread(() => RDP_Start(SRP,SWP));
             Doet.Start();
         }
 
 
-        public void RDP_Start(NetworkStream NS)
+        public void RDP_Start(StreamReader SRP,StreamWriter SWP)
         {
-           
-            StreamReader SR = new StreamReader(NS);
-            StreamWriter SW = new StreamWriter(NS);
-            
+
+            SWP.WriteLine("RDP");
+            SWP.Flush();
+            string[] Delimeter = new string[] { "REMOTEDATA|***|" };
+            string[] ParsedData;
             for (; ; )
             {
-                char[] ByteData = new char[350208];
-                SR.Read(ByteData, 0, 350208);
-                string Data = new string(ByteData);
-                string[] Delimeter = new string[] { "|***|" };
-                string[] DataSplit = Data.Split(Delimeter, StringSplitOptions.None);
-                if (DataSplit[0] == "REMOTEDATA")
-                {
-                    
-                }
+
+                ParsedData = SRP.ReadLine().Split(Delimeter, StringSplitOptions.None);
+                pictureBox1.Image = ByteToImage(Convert.FromBase64String(ParsedData[1]));
+
 
             }
 

